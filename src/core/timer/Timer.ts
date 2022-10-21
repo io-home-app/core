@@ -1,6 +1,7 @@
-import { IOHomeCore } from "../..";
+import type { IOHomeCore } from "../HomeCore";
 
-export class TimerModule {
+export class TimerModule
+{
 
     private interval:   NodeJS.Timer;
 
@@ -13,7 +14,8 @@ export class TimerModule {
     /**
      * Starts the timer sending events every second, minute, hour, day
      */
-    public start(): void {
+    public start(): void
+    {
         this.interval = setInterval(() => {
 
             let now = new Date();

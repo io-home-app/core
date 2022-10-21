@@ -6,7 +6,7 @@ import clc from "cli-color";
  * @param message The message to send
  * @param origin What section / submodule the message was sent from
  */
-export default function log( message:string, origin:string="IOHome", type:"ok"|"error"|"fatal"|"warning"|"info" = "info" ) {
+export default function log( message:string, origin:string="IOHome", type:"ok"|"error"|"fatal"|"warning"|"info"|"debug" = "info" ) {
     let typeString = "";
     switch(type) {
         case "ok":
@@ -22,16 +22,19 @@ export default function log( message:string, origin:string="IOHome", type:"ok"|"
             typeString = clc.redBright("FATAL");
             break;
         case "warning":
-            typeString = clc.yellow("WARNING");
+            typeString = clc.yellowBright("WARNING");
+            break;
+        case "debug":
+            typeString = clc.magenta("DEBUG");
             break;
     }
     
     console.log(
-        clc.cyan(new Date().toLocaleString()),
+        clc.blackBright(new Date().toLocaleString()),
         clc.black(">"),
-        clc.cyan(origin),
+        clc.white(origin).padEnd(20, " "),
         clc.black(">"),
-        typeString,
+        typeString.padEnd(18, " "),
         ">",
         message
     );

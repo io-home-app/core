@@ -1,3 +1,8 @@
+import { formatWithOptions } from "util";
+
+import log from "../../utils/log";
+
+import type { IOHomeCore } from "../HomeCore";
 import type {
     Event,
     EventType,
@@ -14,7 +19,7 @@ export class EventBus
     public eventListeners: Array< EventListener > = [];
 
 
-    constructor() {}
+    constructor( private core:IOHomeCore ) {}
 
 
     /**
@@ -22,7 +27,7 @@ export class EventBus
      */
     public dispatchEvent( event:Event )
     {
-        console.log(event);
+        this.debugLogEvent( event );
 
         for(var el of this.eventListeners) {
             if(el.type == event.type || el.type == "*") {
@@ -64,6 +69,11 @@ export class EventBus
             type: eventType,
             callback
         });
+    }
+
+    private debugLogEvent( event:Event ) {
+        if(!this.core.debug) return;
+        log(formatWithOptions({colors: true}, "Event:", event), "EventBus", "debug");
     }
 
 }
