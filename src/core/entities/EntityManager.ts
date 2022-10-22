@@ -1,5 +1,7 @@
 import { Entity } from "./Entity";
 
+import type { IOHomeCore } from "../HomeCore";
+
 /**
  * Manages all Entities
  */
@@ -11,9 +13,14 @@ export class EntityManager
      */
     private entities: Array<Entity> = [];
 
-    constructor()
+    constructor( public core:IOHomeCore )
     {
+        this.core.eventBus.on( "config:parsed", () => { this.initializeFromConfig(); } );
+    }
 
+    private initializeFromConfig()
+    {
+        this.core.debugLog( "Initializing Entities from Config...", "Entities" )
     }
 
     /**

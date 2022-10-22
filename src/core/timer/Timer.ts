@@ -22,22 +22,22 @@ export class TimerModule
 
             this.core.eventBus.dispatchEvent({
                 type: "time:second",
-                source: "submodule:timer"
+                source: "module:timer"
             });
 
             if(now.getMinutes() != this.lastMinute) { 
                 this.lastMinute = now.getMinutes();
-                this.core.eventBus.dispatchEvent({ type: "time:minute", source: "submodule:timer" });
+                this.core.eventBus.dispatchEvent({ type: "time:minute", source: "module:timer" });
             }
 
             if(now.getHours() != this.lastHour) { 
                 this.lastHour = now.getHours();
-                this.core.eventBus.dispatchEvent({ type: "time:hour", source: "submodule:timer" });
+                this.core.eventBus.dispatchEvent({ type: "time:hour", source: "module:timer" });
             }
 
             if(now.getDate() != this.lastDay) { 
                 this.lastDay = now.getDate();
-                this.core.eventBus.dispatchEvent({ type: "time:day", source: "submodule:timer" });
+                this.core.eventBus.dispatchEvent({ type: "time:day", source: "module:timer" });
             }
         }, 1000);
     }

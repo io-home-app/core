@@ -3,11 +3,12 @@ export interface EventListener {
     callback: (e: any) => void;
 }
 
-export type EventSource = "core" | "submodule:timer" | "submodule:database" | "submodule:api" | "submodule:debug" | "submodule:services" | "submodule:state";
+export type EventSource = "core" | "module:timer" | "module:database" | "module:api" | "module:debug" | "module:config" | string;
 
 export type EventType = 
     "core:ready" |
-    "time:second" | "time:minute" | "time:hour" | "time:day"
+    "time:second" | "time:minute" | "time:hour" | "time:day" |
+    "config:parsed"
 
 export type Event =
     { source:EventSource, type: "core:ready" } |
@@ -15,4 +16,6 @@ export type Event =
     { source:EventSource, type: "time:second" } |
     { source:EventSource, type: "time:minute" } |
     { source:EventSource, type: "time:hour" } |
-    { source:EventSource, type: "time:day" }
+    { source:EventSource, type: "time:day" } |
+
+    { source:EventSource, type: "config:parsed" }
